@@ -1,0 +1,320 @@
+{
+	"info": {
+		"_postman_id": "b7bb1a48-7b46-42c5-b201-01a0d93dd35a",
+		"name": "Product Store demoblaze.com",
+		"description": "APIs Retrieved from : [https://demoblaze.com/cart.html](https://demoblaze.com/cart.html)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39255407"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// var encodedData = require('btoa')(pm.collectionVariables.get(\"password\"));",
+							"var encodedData = require('btoa')(pm.collectionVariables.get(\"password\"));",
+							"pm.variables.set(\"encodedPassword\", encodedData);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const data = pm.response.text();",
+							"pm.collectionVariables.set(\"token\", data.substring(13, data.length-2));",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"{{email}}\",\n    \"password\": \"{{encodedPassword}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.demoblaze.com/login",
+					"protocol": "https",
+					"host": [
+						"api",
+						"demoblaze",
+						"com"
+					],
+					"path": [
+						"login"
+					]
+				},
+				"description": "Generated from cURL: curl 'https://api.demoblaze.com/login' \\\n  -H 'accept: */*' \\\n  -H 'accept-language: en-US,en;q=0.9,id;q=0.8' \\\n  -H 'content-type: application/json' \\\n  -H 'origin: https://demoblaze.com' \\\n  -H 'priority: u=1, i' \\\n  -H 'referer: https://demoblaze.com/' \\\n  -H 'sec-ch-ua: \"Chromium\";v=\"130\", \"Google Chrome\";v=\"130\", \"Not?A_Brand\";v=\"99\"' \\\n  -H 'sec-ch-ua-mobile: ?0' \\\n  -H 'sec-ch-ua-platform: \"macOS\"' \\\n  -H 'sec-fetch-dest: empty' \\\n  -H 'sec-fetch-mode: cors' \\\n  -H 'sec-fetch-site: same-site' \\\n  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36' \\\n  --data-raw '{\"username\":\"random@email.com\",\"password\":\"UGFzc3dvcmQxMjMh\"}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Check token Expiration",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"token\": \"{{token}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.demoblaze.com/check",
+					"protocol": "https",
+					"host": [
+						"api",
+						"demoblaze",
+						"com"
+					],
+					"path": [
+						"check"
+					]
+				},
+				"description": "Generated from cURL: curl 'https://api.demoblaze.com/check' \\\n  -H 'accept: */*' \\\n  -H 'accept-language: en-US,en;q=0.9,id;q=0.8' \\\n  -H 'content-type: application/json' \\\n  -H 'origin: https://demoblaze.com' \\\n  -H 'priority: u=1, i' \\\n  -H 'referer: https://demoblaze.com/' \\\n  -H 'sec-ch-ua: \"Chromium\";v=\"130\", \"Google Chrome\";v=\"130\", \"Not?A_Brand\";v=\"99\"' \\\n  -H 'sec-ch-ua-mobile: ?0' \\\n  -H 'sec-ch-ua-platform: \"macOS\"' \\\n  -H 'sec-fetch-dest: empty' \\\n  -H 'sec-fetch-mode: cors' \\\n  -H 'sec-fetch-site: same-site' \\\n  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36' \\\n  --data-raw '{\"token\":\"cmFuZG9tQGVtYWlsLmNvbTE3MzEzMTA=\"}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Entries - Home Products",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.demoblaze.com/entries",
+					"protocol": "https",
+					"host": [
+						"api",
+						"demoblaze",
+						"com"
+					],
+					"path": [
+						"entries"
+					]
+				},
+				"description": "Generated from cURL: curl 'https://api.demoblaze.com/entries' \\\n  -H 'accept: */*' \\\n  -H 'accept-language: en-US,en;q=0.9,id;q=0.8' \\\n  -H 'origin: https://demoblaze.com' \\\n  -H 'priority: u=1, i' \\\n  -H 'referer: https://demoblaze.com/' \\\n  -H 'sec-ch-ua: \"Chromium\";v=\"130\", \"Google Chrome\";v=\"130\", \"Not?A_Brand\";v=\"99\"' \\\n  -H 'sec-ch-ua-mobile: ?0' \\\n  -H 'sec-ch-ua-platform: \"macOS\"' \\\n  -H 'sec-fetch-dest: empty' \\\n  -H 'sec-fetch-mode: cors' \\\n  -H 'sec-fetch-site: same-site' \\\n  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'"
+			},
+			"response": []
+		},
+		{
+			"name": "View Product by Selected Id",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"4\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.demoblaze.com/view",
+					"protocol": "https",
+					"host": [
+						"api",
+						"demoblaze",
+						"com"
+					],
+					"path": [
+						"view"
+					]
+				},
+				"description": "Generated from cURL: curl 'https://api.demoblaze.com/view' \\\n  -H 'accept: */*' \\\n  -H 'accept-language: en-US,en;q=0.9,id;q=0.8' \\\n  -H 'content-type: application/json' \\\n  -H 'origin: https://demoblaze.com' \\\n  -H 'priority: u=1, i' \\\n  -H 'referer: https://demoblaze.com/' \\\n  -H 'sec-ch-ua: \"Chromium\";v=\"130\", \"Google Chrome\";v=\"130\", \"Not?A_Brand\";v=\"99\"' \\\n  -H 'sec-ch-ua-mobile: ?0' \\\n  -H 'sec-ch-ua-platform: \"macOS\"' \\\n  -H 'sec-fetch-dest: empty' \\\n  -H 'sec-fetch-mode: cors' \\\n  -H 'sec-fetch-site: same-site' \\\n  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36' \\\n  --data-raw '{\"id\":\"4\"}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Add to Card",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"58d45c9d-ab6d-6e07-f2a7-993a6c7686e6-{{$timestamp}}\",\n    \"cookie\": \"{{token}}\",\n    \"prod_id\": 2,\n    \"flag\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.demoblaze.com/addtocart",
+					"protocol": "https",
+					"host": [
+						"api",
+						"demoblaze",
+						"com"
+					],
+					"path": [
+						"addtocart"
+					]
+				},
+				"description": "Generated from cURL: curl 'https://api.demoblaze.com/addtocart' \\\n  -H 'accept: */*' \\\n  -H 'accept-language: en-US,en;q=0.9,id;q=0.8' \\\n  -H 'content-type: application/json' \\\n  -H 'origin: https://demoblaze.com' \\\n  -H 'priority: u=1, i' \\\n  -H 'referer: https://demoblaze.com/' \\\n  -H 'sec-ch-ua: \"Chromium\";v=\"130\", \"Google Chrome\";v=\"130\", \"Not?A_Brand\";v=\"99\"' \\\n  -H 'sec-ch-ua-mobile: ?0' \\\n  -H 'sec-ch-ua-platform: \"macOS\"' \\\n  -H 'sec-fetch-dest: empty' \\\n  -H 'sec-fetch-mode: cors' \\\n  -H 'sec-fetch-site: same-site' \\\n  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36' \\\n  --data-raw '{\"id\":\"58d45c9d-ab6d-6e07-f2a7-993a6c7686e6\",\"cookie\":\"user=09e3e5a8-02ab-e4c3-be66-072a1ae92f55\",\"prod_id\":1,\"flag\":false}'"
+			},
+			"response": []
+		},
+		{
+			"name": "View Cart",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cookie\": \"{{token}}\",\n    \"flag\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.demoblaze.com/viewcart",
+					"protocol": "https",
+					"host": [
+						"api",
+						"demoblaze",
+						"com"
+					],
+					"path": [
+						"viewcart"
+					]
+				},
+				"description": "Generated from cURL: curl 'https://api.demoblaze.com/viewcart' \\\n  -H 'accept: */*' \\\n  -H 'accept-language: en-US,en;q=0.9,id;q=0.8' \\\n  -H 'content-type: application/json' \\\n  -H 'origin: https://demoblaze.com' \\\n  -H 'priority: u=1, i' \\\n  -H 'referer: https://demoblaze.com/' \\\n  -H 'sec-ch-ua: \"Chromium\";v=\"130\", \"Google Chrome\";v=\"130\", \"Not?A_Brand\";v=\"99\"' \\\n  -H 'sec-ch-ua-mobile: ?0' \\\n  -H 'sec-ch-ua-platform: \"macOS\"' \\\n  -H 'sec-fetch-dest: empty' \\\n  -H 'sec-fetch-mode: cors' \\\n  -H 'sec-fetch-site: same-site' \\\n  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36' \\\n  --data-raw '{\"cookie\":\"cmFuZG9tQGVtYWlsLmNvbTE3MzEzMTI=\",\"flag\":true}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Cart",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cookie\": \"{{token}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.demoblaze.com/deletecart",
+					"protocol": "https",
+					"host": [
+						"api",
+						"demoblaze",
+						"com"
+					],
+					"path": [
+						"deletecart"
+					]
+				},
+				"description": "Generated from cURL: curl 'https://api.demoblaze.com/deletecart' \\\n  -H 'accept: */*' \\\n  -H 'accept-language: en-US,en;q=0.9,id;q=0.8' \\\n  -H 'content-type: application/json' \\\n  -H 'origin: https://demoblaze.com' \\\n  -H 'priority: u=1, i' \\\n  -H 'referer: https://demoblaze.com/' \\\n  -H 'sec-ch-ua: \"Chromium\";v=\"130\", \"Google Chrome\";v=\"130\", \"Not?A_Brand\";v=\"99\"' \\\n  -H 'sec-ch-ua-mobile: ?0' \\\n  -H 'sec-ch-ua-platform: \"macOS\"' \\\n  -H 'sec-fetch-dest: empty' \\\n  -H 'sec-fetch-mode: cors' \\\n  -H 'sec-fetch-site: same-site' \\\n  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36' \\\n  --data-raw '{\"cookie\":\"random@email.com\"}'"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "email",
+			"value": "random@email.com",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "Password123!",
+			"type": "string"
+		},
+		{
+			"key": "encodedPass",
+			"value": "UGFzc3dvcmQxMjMh",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "cmFuZG9tQGVtYWlsLmNvbTE3MzEzMTQ=",
+			"type": "string"
+		}
+	]
+}
