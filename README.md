@@ -3,7 +3,7 @@ Sample usage of Locust
 
 ## Website Test
 
-API Collection retrieved from this Website : https://www.demoblaze.com/
+API Collection is retrieved from this Website : https://www.demoblaze.com/
 
 You can also check the API Collection by importing `.json` file from this repository into Postman.
 
