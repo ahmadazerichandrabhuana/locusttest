@@ -15,9 +15,9 @@ Install [Locust](https://docs.locust.io/en/stable/installation.html)
 
 ## Run Test
 
-CD into folder where you store the downloaded `locustfile.py`
+CD into folder where you store the downloaded `demoblaze.py`
 
-    cd [your_path_where_you_store_downloaded_locustfile.py_file]
+    cd [your_path_where_you_store_downloaded_demoblaze.py_file]
 
 and run command : 
 
