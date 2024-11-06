@@ -50,3 +50,7 @@ Stop the test by hitting button `Stop`. And you can start analyze the performanc
 ## Logs
 
 <img width="1440" alt="Screenshot 2024-11-06 at 10 34 48 AM" src="https://github.com/user-attachments/assets/e459d19c-ecef-4583-b9ea-fc3f80ba702b">
+
+Or you can run this command when start Locust to save the log into specific file
+
+    locust --logfile=locustfile.log
