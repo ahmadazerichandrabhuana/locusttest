@@ -21,7 +21,7 @@ CD into folder where you store the downloaded `locustfile.py`
 
 and run command : 
 
-    locust
+    locust -f demoblaze.py
 
 Then open this address on your Web Browser : 
 
@@ -53,4 +53,4 @@ Stop the test by hitting button `Stop`. And you can start analyze the performanc
 
 Or you can run this command when start Locust to save the log into specific file
 
-    locust --logfile=locustfile.log
+    locust -f demoblaze.py --logfile=locustfile.log
