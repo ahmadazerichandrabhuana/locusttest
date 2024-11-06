@@ -2,19 +2,23 @@ import logging, base64, time
 from locust import HttpUser, task, between
 from random import randrange
 
+# function for asserting Response Code
 def assertResponceCode(response,code):
     if response.status_code != code:
         response.failure("Expected "+ response.status_code + " to be "+ code)
 
+# function for asserting Response Text
 def assertContains(response,text):
     with response as r:
         if text not in r.text:
             r.failure("Expected "+ response.text + " to contain "+ text)
 
+# function for asserting both Response Code and Response Text
 def assertResponse(response,code,text):
     assertResponceCode(response,code)
     assertContains(response,text)
 
+# main class to be run by Locust
 class demoblaze(HttpUser):
     host = "https://api.demoblaze.com"
     default_headers = {
@@ -24,6 +28,7 @@ class demoblaze(HttpUser):
     # wait_time = between(1, 5)
     token = ""
 
+    # function to be run once User is swarmed, it'll call /login and /check apis
     def on_start(self):
         password = "Password123!"
         password_bytes = password.encode("ascii")
@@ -39,6 +44,7 @@ class demoblaze(HttpUser):
         logging.info("User is logged in")
         logging.info("Response token check : " + responseCheckToken.text)
 
+    # function to be run once User is closed, it'll call /deletecart
     def on_stop(self):
         # this action will not be shown on Locust Statistics tab, but it can be seen from terminal / Logs tab
         responseBody = self.client.post("/deletecart", json={"cookie":self.token})
